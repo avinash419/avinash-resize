@@ -198,21 +198,17 @@
             gap: 15px;
         }
 
-        /* Fixed range slider styles with cross-browser compatibility */
         input[type="range"] {
             flex: 1;
             height: 10px;
             -webkit-appearance: none;
-            appearance: none;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             outline: none;
         }
 
-        /* Webkit browsers (Chrome, Safari) */
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
             width: 24px;
             height: 24px;
             border-radius: 50%;
@@ -220,45 +216,6 @@
             cursor: pointer;
             box-shadow: 0 0 10px rgba(76, 201, 240, 0.8);
             border: 2px solid white;
-        }
-
-        /* Firefox */
-        input[type="range"]::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--accent);
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(76, 201, 240, 0.8);
-            border: 2px solid white;
-            border: none;
-        }
-
-        /* IE/Edge */
-        input[type="range"]::-ms-thumb {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--accent);
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(76, 201, 240, 0.8);
-            border: 2px solid white;
-        }
-
-        /* Track for Firefox */
-        input[type="range"]::-moz-range-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            height: 10px;
-        }
-
-        /* Track for IE/Edge */
-        input[type="range"]::-ms-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            height: 10px;
-            border: none;
-            color: transparent;
         }
 
         .value-display {
@@ -652,6 +609,8 @@
             <p><span class="app-name">Avinash Resize</span> &copy; 2023 | Compress images to as low as 10KB without quality loss</p>
         </footer>
     </div>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1576896313441491"
+     crossorigin="anonymous"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -856,24 +815,18 @@
                     // Calculate new dimensions (maintain aspect ratio)
                     const maxWidth = 800;
                     const maxHeight = 600;
-                    
-                    // FIXED: Properly get image dimensions
                     let width = currentImage.naturalWidth;
                     let height = currentImage.naturalHeight;
                     
                     if (width > maxWidth) {
-                        height = (height * maxWidth) / width;
+                        height *= maxWidth / width;
                         width = maxWidth;
                     }
                     
                     if (height > maxHeight) {
-                        width = (width * maxHeight) / height;
+                        width *= maxHeight / height;
                         height = maxHeight;
                     }
-                    
-                    // Ensure minimum dimensions
-                    width = Math.max(100, width);
-                    height = Math.max(100, height);
                     
                     canvas.width = width;
                     canvas.height = height;
@@ -924,7 +877,7 @@
                         processedPreview.appendChild(processedImage);
                         
                         // Update processed image info
-                        processedDimensions.textContent = `${Math.round(width)} × ${Math.round(height)}`;
+                        processedDimensions.textContent = `${processedImage.naturalWidth} × ${processedImage.naturalHeight}`;
                         
                         // Calculate actual file size
                         const actualSize = Math.round(compressedDataUrl.length * 0.75);
